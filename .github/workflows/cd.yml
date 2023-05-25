@@ -24,7 +24,6 @@ jobs:
           port: 22
           script: |
             cd ~/needtochange
-            eval "$(ssh-agent -s)"
             git pull origin master
             git status
             export NVM_DIR=~/.nvm
