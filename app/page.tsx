@@ -10,7 +10,7 @@ export default function Home() {
         <div className="flex space-x-3 items-center lg:ml-20 lg:mr-20">
           <Menu size={25} />
           <p className="text-2xl">9anime</p>
-          <label className="relative block w-[600px]">
+          <label className="relative w-[600px] hidden lg:block">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
               <svg
                 className="h-5 w-5 fill-gray-400"
@@ -38,14 +38,27 @@ export default function Home() {
       </div>
       <div className="lg:ml-20 lg:mr-20 lg:mt-5 flex flex-col space-y-10">
         <Carousel />
-        <div className="flex">
-          <div className="flex flex-col space-y-5">
-            <p className="text-2xl font-bold">Recently Updated</p>
-            <div className="flex gap-5 flex-wrap">
+        <div className="flex flex-col lg:flex-row">
+          <div className="flex flex-col space-y-5 w-3/4">
+            <div className="flex items-center justify-between">
+              <p className="text-2xl font-bold">Recently Updated</p>
+              <div className="flex items-center space-x-2 text-gray-400">
+                <p>All</p>
+                <p>Sub</p>
+                <p>Dub</p>
+                <p>Chinese</p>
+                <p>Trending</p>
+                <p>Random</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
               {[1, 2, 3, 4, 5, 6, 7, 8, 1, 1].map((a) => (
                 <AnimeCard />
               ))}
             </div>
+          </div>
+          <div className="w-1/4 ml-10">
+            <p className="text-2xl font-bold">Top anime</p>
           </div>
         </div>
       </div>
