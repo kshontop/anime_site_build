@@ -30,4 +30,4 @@ jobs:
             source ~/.nvm/nvm.sh
             npm run install --only=prod
             npm run build
-            pm2 restart anime
+            pm2 restart Anime
