@@ -1,14 +1,35 @@
+"use client";
 import { AnimeCard } from "@/components/AnimeCard";
 import Carousel from "@/components/Carousel";
 import { Input } from "@/components/ui/input";
 import { Menu, Search } from "lucide-react";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 export default function Home() {
   return (
     <div>
-      <div className="flex p-5 justify-between bg-[#1c1c1c] items-center">
+      <div className="flex p-5 justify-between bg-background-front items-center">
         <div className="flex space-x-3 items-center lg:ml-20 lg:mr-20">
-          <Menu size={25} />
+          <NavigationMenu className="lg:hidden">
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>
+                  <Menu size={25} />
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuLink>ANIME VOSTFR</NavigationMenuLink>
+                  <NavigationMenuLink>ANIME VF</NavigationMenuLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
           <p className="text-2xl">9anime</p>
           <label className="relative w-[600px] hidden lg:block">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -25,32 +46,27 @@ export default function Home() {
               </svg>
             </span>
             <Input
-              className="w-full bg-transparent placeholder:font-italitc rounded-lg py-2 pl-10 pr-4"
+              className="w-full bg-transparent placeholder:font-italitc rounded-lg py-2 pl-10 pr-4 focus:outline-none border-2 focus:border-gray-400 border-gray-600"
               placeholder="Search Anime"
               type="text"
             />
           </label>
+          <div className="space-x-3 hidden lg:flex">
+            <p className="cursor-pointer">Anime VOSTFR</p>
+            <p className="cursor-pointer">Anime VF</p>
+          </div>
         </div>
 
         <div className="flex space-x-5">
           <Search size={25} className="lg:hidden" />
         </div>
       </div>
+
       <div className="lg:ml-20 lg:mr-20 lg:mt-5 flex flex-col space-y-10">
         <Carousel />
         <div className="flex flex-col lg:flex-row">
           <div className="flex flex-col space-y-5 w-3/4">
-            <div className="flex items-center justify-between">
-              <p className="text-2xl font-bold">Recently Updated</p>
-              <div className="flex items-center space-x-2 text-gray-400">
-                <p>All</p>
-                <p>Sub</p>
-                <p>Dub</p>
-                <p>Chinese</p>
-                <p>Trending</p>
-                <p>Random</p>
-              </div>
-            </div>
+            <p className="text-2xl font-bold">Recently Updated</p>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
               {[1, 2, 3, 4, 5, 6, 7, 8, 1, 1].map((a) => (
                 <AnimeCard />
