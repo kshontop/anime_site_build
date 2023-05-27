@@ -2,34 +2,16 @@
 import { AnimeCard } from "@/components/AnimeCard";
 import Carousel from "@/components/Carousel";
 import { Input } from "@/components/ui/input";
-import { Menu, Search } from "lucide-react";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+import { Search } from "lucide-react";
+import AnimeCardSecondary from "@/components/AnimeCardSecondary";
+import { TopVf } from "@/partials/TopVf";
+import TopVostfr from "@/partials/TopVostfr";
 
 export default function Home() {
   return (
     <div>
-      <div className="flex p-5 justify-between bg-background-front items-center">
+      <div className="flex p-5 justify-between bg-front items-center">
         <div className="flex space-x-3 items-center lg:ml-20 lg:mr-20">
-          <NavigationMenu className="lg:hidden">
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>
-                  <Menu size={25} />
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <NavigationMenuLink>ANIME VOSTFR</NavigationMenuLink>
-                  <NavigationMenuLink>ANIME VF</NavigationMenuLink>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
           <p className="text-2xl">9anime</p>
           <label className="relative w-[600px] hidden lg:block">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -52,8 +34,8 @@ export default function Home() {
             />
           </label>
           <div className="space-x-3 hidden lg:flex">
-            <p className="cursor-pointer">Anime VOSTFR</p>
-            <p className="cursor-pointer">Anime VF</p>
+            <p className="cursor-pointer hover:text-primary">Anime VOSTFR</p>
+            <p className="cursor-pointer hover:text-primary">Anime VF</p>
           </div>
         </div>
 
@@ -64,17 +46,38 @@ export default function Home() {
 
       <div className="lg:ml-20 lg:mr-20 lg:mt-5 flex flex-col space-y-10">
         <Carousel />
-        <div className="flex flex-col lg:flex-row">
-          <div className="flex flex-col space-y-5 w-3/4">
-            <p className="text-2xl font-bold">Recently Updated</p>
+        <div className="flex flex-col space-y-10 lg:flex-row lg:space-y-0">
+          <div className="flex flex-col space-y-10 w-3/4">
+            <p className="text-2xl font-bold">DERNIERS ÉPISODES</p>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
               {[1, 2, 3, 4, 5, 6, 7, 8, 1, 1].map((a) => (
                 <AnimeCard />
               ))}
             </div>
+            <div className="flex flex-col space-y-10 lg:space-y-0 gap-5 lg:flex-row w-full">
+              <div className="w-full lg:w-1/2 text-xl uppercase">
+                <p>Episodes VF Récemment Ajoutés</p>
+                {[1, 2, 3, 4, 5].map((a) => (
+                  <AnimeCardSecondary />
+                ))}
+              </div>
+              <div className="w-full lg:w-1/2 text-xl uppercase">
+                <p>ANIMES DE LA SAISON EN COURS</p>
+                {[1, 2, 3, 4, 5].map((a) => (
+                  <AnimeCardSecondary />
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="w-1/4 ml-10">
-            <p className="text-2xl font-bold">Top anime</p>
+          <div className="flex-col w-full lg:w-1/4 space-y-10">
+            <div className="w-full lg:ml-10 lg:space-y-0">
+              <p className="text-2xl font-bold">Top Animes VF</p>
+              <TopVf />
+            </div>
+            <div className="w-full lg:ml-10 lg:space-y-0">
+              <p className="text-2xl font-bold">Top Animes VOSTFR</p>
+              <TopVostfr />
+            </div>
           </div>
         </div>
       </div>
