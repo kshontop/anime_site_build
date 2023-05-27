@@ -22,3 +22,20 @@ export interface ITopVostfrAnime {
   type?: string;
   link?: string;
 }
+
+export interface IEpisodeRecent {
+  poster?: string;
+  title?: string;
+  released?: string;
+  link?: string;
+  episode?: string;
+  type?: string;
+}
+
+export interface IPopularAnime {
+  poster?: string;
+  title?: string;
+  link?: string;
+  description: string;
+  type?: String;
+}

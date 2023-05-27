@@ -3,13 +3,13 @@ import React from "react";
 import AnimeCardSecondary from "@/components/AnimeCardSecondary";
 import { useState, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ITopVfAnime } from "@/@types/anime";
+import { IEpisodeRecent } from "@/@types/anime";
 
-export const TopVf = () => {
-  const [animes, setAnimes] = useState<ITopVfAnime[]>([]);
+export const RecentVf = () => {
+  const [animes, setAnimes] = useState<IEpisodeRecent[]>([]);
 
   const fetchAnimes = async () => {
-    const res = await fetch("/api/anime/topvf");
+    const res = await fetch("/api/anime/recentvf");
     setAnimes(await res.json());
   };
 
@@ -26,7 +26,9 @@ export const TopVf = () => {
             poster={anime.poster}
           />
         ))
-        : [1, 2, 3].map((i) => <Skeleton key={i} className="w-full h-20" />)}
+        : new Array(6)
+          .fill(undefined)
+          .map((i) => <Skeleton key={i} className="w-full h-20" />)}
     </div>
   );
 };

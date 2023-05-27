@@ -1,11 +1,12 @@
-"use client";
 import { AnimeCard } from "@/components/AnimeCard";
 import Carousel from "@/components/Carousel";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import AnimeCardSecondary from "@/components/AnimeCardSecondary";
 import { TopVf } from "@/partials/TopVf";
 import TopVostfr from "@/partials/TopVostfr";
+import { RecentVf } from "@/partials/RecentVf";
+import { RecentVostfr } from "@/partials/RecentVostfr";
+import { PopularAnime } from "@/partials/PopularAnime";
 
 export default function Home() {
   return (
@@ -48,34 +49,26 @@ export default function Home() {
         <Carousel />
         <div className="flex flex-col space-y-10 lg:flex-row lg:space-y-0">
           <div className="flex flex-col space-y-10 w-3/4">
-            <p className="text-2xl font-bold">DERNIERS ÉPISODES</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 1, 1].map((a) => (
-                <AnimeCard />
-              ))}
-            </div>
+            <p className="text-2xl font-bold uppercase">Animés populaires</p>
+            <PopularAnime />
             <div className="flex flex-col space-y-10 lg:space-y-0 gap-5 lg:flex-row w-full">
               <div className="w-full lg:w-1/2 text-xl uppercase">
                 <p>Episodes VF Récemment Ajoutés</p>
-                {[1, 2, 3, 4, 5].map((a) => (
-                  <AnimeCardSecondary />
-                ))}
+                <RecentVf />
               </div>
               <div className="w-full lg:w-1/2 text-xl uppercase">
                 <p>ANIMES DE LA SAISON EN COURS</p>
-                {[1, 2, 3, 4, 5].map((a) => (
-                  <AnimeCardSecondary />
-                ))}
+                <RecentVostfr />{" "}
               </div>
             </div>
           </div>
           <div className="flex-col w-full lg:w-1/4 space-y-10">
             <div className="w-full lg:ml-10 lg:space-y-0">
-              <p className="text-2xl font-bold">Top Animes VF</p>
+              <p className="text-2xl font-bold mb-5">Top Animes VF</p>
               <TopVf />
             </div>
             <div className="w-full lg:ml-10 lg:space-y-0">
-              <p className="text-2xl font-bold">Top Animes VOSTFR</p>
+              <p className="text-2xl font-bold mb-5">Top Animes VOSTFR</p>
               <TopVostfr />
             </div>
           </div>

@@ -1,4 +1,10 @@
-import { ICarousel, ITopVfAnime, ITopVostfrAnime } from "@/@types/anime";
+import {
+  ICarousel,
+  IEpisodeRecent,
+  IPopularAnime,
+  ITopVfAnime,
+  ITopVostfrAnime,
+} from "@/@types/anime";
 import * as cheerio from "cheerio";
 
 class VostFree {
@@ -88,7 +94,8 @@ class VostFree {
             .children(".movie-hidden")
             .children(".info")
             .children(".title")
-            .text();
+            .text()
+            .split(/\r?\n/)[0];
           let link = $(this).children("a").attr("href");
           if (title !== "") {
             result.push({
@@ -99,6 +106,102 @@ class VostFree {
             });
           }
         });
+      return result;
+    } catch (error) {
+      return [];
+    }
+  }
+
+  async getLatestVF() {
+    try {
+      const res = await fetch(this.baseUrl);
+      const $ = cheerio.load(await res.text());
+      let url = this.baseUrl;
+      let result: IEpisodeRecent[] = [];
+
+      $("#content")
+        .find(".block")
+        .children(".new-episode")
+        .each(function() {
+          let poster = $(this).children(".image").children("img").attr("src");
+          let title = $(this).children(".info").text().trim();
+          let link = $(this).find("a").attr("href");
+          let episode = $(this).children(".episode").text();
+          let released = $(this).children("b").text().trim();
+
+          result.push({
+            poster: `${url}${poster}`,
+            title,
+            link,
+            episode,
+            released,
+            type: "VF",
+          });
+        });
+      return result.splice(0, 6);
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  }
+
+  async getLatestVostfr() {
+    try {
+      const res = await fetch(this.baseUrl);
+      const $ = cheerio.load(await res.text());
+      let url = this.baseUrl;
+      let result: IEpisodeRecent[] = [];
+      $("#content")
+        .find(".block.half.last")
+        .children(".new-episode")
+        .each(function() {
+          let poster = $(this).children(".image").children("img").attr("src");
+          let title = $(this).children(".info").text().trim();
+          let link = $(this).find("a").attr("href");
+          let episode = $(this).children(".episode").text();
+          let released = $(this).children("b").text().trim();
+
+          result.push({
+            poster: `${url}${poster}`,
+            title,
+            link,
+            episode,
+            released,
+            type: "VOSTFR",
+          });
+        });
+
+      return result;
+    } catch (error) {
+      return [];
+    }
+  }
+
+  async getPopularAnime() {
+    try {
+      const res = await fetch(this.baseUrl);
+      const $ = cheerio.load(await res.text());
+      let url = this.baseUrl;
+      let result: IPopularAnime[] = [];
+      $("#content")
+        .eq(2)
+        .children(".movie-poster")
+        .each(function() {
+          let poster = $(this).children(".image").children("img").attr("src");
+          let title = $(this).children(".image").children("img").attr("alt");
+          let link = $(this).find("a").attr("href");
+          let description = $(this).find(".desc").text().trim();
+          let type = $(this).children(".quality").text();
+
+          result.push({
+            poster: `${url}${poster}`,
+            title,
+            link,
+            description,
+            type,
+          });
+        });
+
       return result;
     } catch (error) {
       return [];
