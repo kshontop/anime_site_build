@@ -12,7 +12,7 @@ function AnimeCardSecondary({ title, poster }: AnimeProps) {
         <img src={poster} className="h-full object-cover rounded-lg" />
       </div>
       <div className="p-2">
-        <p className="line-clamp-2">{title}</p>
+        <p className="line-clamp-2 text-sm">{title}</p>
       </div>
     </div>
   );

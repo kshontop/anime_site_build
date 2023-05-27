@@ -16,8 +16,9 @@ export const PopularAnime = () => {
   useEffect(() => {
     fetchAnimes();
   }, []);
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
+    <>
       {animes.length > 0
         ? animes.map((anime, index) => (
           <AnimeCard key={index} title={anime.title} poster={anime.poster} />
@@ -27,9 +28,9 @@ export const PopularAnime = () => {
           .map((i) => (
             <Skeleton
               key={i}
-              className="h-full w-[400px] lg:h-[400px] lg:w-[500px]"
+              className="h-[250px] w-[150px] lg:h-[400px] lg:w-[200px]"
             />
           ))}
-    </div>
+    </>
   );
 };

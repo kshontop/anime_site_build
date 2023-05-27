@@ -45,12 +45,14 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="lg:ml-20 lg:mr-20 lg:mt-5 flex flex-col space-y-10">
+      <div className="lg:ml-20 lg:mr-20 lg:mt-5 flex flex-col space-y-10 ml-2 mr-2">
         <Carousel />
         <div className="flex flex-col space-y-10 lg:flex-row lg:space-y-0">
-          <div className="flex flex-col space-y-10 w-3/4">
+          <div className="flex flex-col space-y-10 w-full lg:w-3/4 items-center lg:items-start">
             <p className="text-2xl font-bold uppercase">Animés populaires</p>
-            <PopularAnime />
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 lg:gap-5">
+              <PopularAnime />
+            </div>
             <div className="flex flex-col space-y-10 lg:space-y-0 gap-5 lg:flex-row w-full">
               <div className="w-full lg:w-1/2 text-xl uppercase">
                 <p>Episodes VF Récemment Ajoutés</p>
