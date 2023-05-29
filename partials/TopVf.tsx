@@ -24,6 +24,7 @@ export const TopVf = () => {
             key={index}
             title={anime.title}
             poster={anime.poster}
+            link={anime.link}
           />
         ))
         : [1, 2, 3].map((i) => <Skeleton key={i} className="w-full h-20" />)}

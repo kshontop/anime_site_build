@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { Carousel as ReactCarousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { Play } from "lucide-react";
 import { ICarousel } from "@/@types/anime";
 import { Skeleton } from "./ui/skeleton";
+import Link from "next/link";
+import { idExtractor } from "@/lib/extractor";
 
 function Carousel() {
   const [animes, setAnimes] = useState<ICarousel[]>([]);
@@ -13,8 +15,6 @@ function Carousel() {
   useEffect(() => {
     fetchAnimeData();
   }, []);
-
-  console.log(animes);
 
   async function fetchAnimeData() {
     const result = await fetch("/api/anime/carousel");
@@ -49,7 +49,7 @@ function CarouselSingle({
 }: ICarousel) {
   return (
     <div
-      id={`slide${link}`}
+      id={`slide${idExtractor(link)}`}
       className="relative w-full h-[250px] sm:h-[350px] lg:h-[500px]"
     >
       {/* small devices */}
@@ -75,10 +75,13 @@ function CarouselSingle({
               {type} | {released}
             </p>
             <p className="line-clamp-3 text-gray-400">{description}</p>
-            <Button className="w-1/2">
+            <Link
+              href={`/${idExtractor(link)}`}
+              className={`${buttonVariants({ variant: "default" })} w-1/2`}
+            >
               <Play className="mr-2 h-5 w-5" />
               Play Now
-            </Button>
+            </Link>
           </div>
           <div className="w-2/3 h-full">
             <img

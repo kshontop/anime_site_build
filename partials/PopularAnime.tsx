@@ -21,7 +21,12 @@ export const PopularAnime = () => {
     <>
       {animes.length > 0
         ? animes.map((anime, index) => (
-          <AnimeCard key={index} title={anime.title} poster={anime.poster} />
+          <AnimeCard
+            key={index}
+            title={anime.title}
+            poster={anime.poster}
+            link={anime.link}
+          />
         ))
         : new Array(10)
           .fill(undefined)

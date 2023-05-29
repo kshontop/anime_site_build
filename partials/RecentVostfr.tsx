@@ -24,6 +24,7 @@ export const RecentVostfr = () => {
             key={index}
             title={anime.title}
             poster={anime.poster}
+            link={anime.link}
           />
         ))
         : new Array(6)
