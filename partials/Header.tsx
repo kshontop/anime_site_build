@@ -1,12 +1,15 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+import { Home as HomeIcon, Search, Tv } from "lucide-react";
+import Link from "next/link";
 
-export const Header = (props: {}) => {
+export default function Header() {
   return (
-    <div className="flex p-5 justify-between bg-front items-center">
-      <div className="flex space-x-3 items-center lg:ml-20 lg:mr-20">
+    <div className="flex p-5 justify-between bg-front items-center ">
+      <div className="flex space-x-3 items-center lg:ml-20">
         <p className="text-2xl">9anime</p>
+      </div>
+      <div className="flex space-x-5 items-center lg:mr-20">
         <label className="relative w-[600px] hidden lg:block">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3">
             <svg
@@ -27,10 +30,25 @@ export const Header = (props: {}) => {
             type="text"
           />
         </label>
-      </div>
-      <div className="flex space-x-5">
+        <div className="flex space-x-3">
+          <Link
+            href={"/"}
+            className="flex text-center space-x-3 hover:text-primary cursor-pointer"
+          >
+            <HomeIcon />
+            <p className="text-lg font-bold">Home</p>
+          </Link>
+          <Link
+            href={"/"}
+            className="flex text-center hover:text-primary space-x-3 cursor-pointer "
+          >
+            <Tv />
+            <p className="hover:text-primary text-lg font-bold">Anime</p>
+          </Link>
+        </div>
+
         <Search size={25} className="lg:hidden" />
       </div>
     </div>
   );
-};
+}

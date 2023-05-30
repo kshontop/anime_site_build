@@ -27,7 +27,7 @@ export const TopVf = () => {
             link={anime.link}
           />
         ))
-        : [1, 2, 3].map((i) => <Skeleton key={i} className="w-full h-20" />)}
+        : [1, 2, 3].map((_, i) => <Skeleton key={i} className="w-full h-20" />)}
     </div>
   );
 };

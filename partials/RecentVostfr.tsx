@@ -29,7 +29,7 @@ export const RecentVostfr = () => {
         ))
         : new Array(6)
           .fill(undefined)
-          .map((i) => <Skeleton key={i} className="w-full h-20" />)}
+          .map((_, i) => <Skeleton key={i} className="w-full h-20" />)}
     </div>
   );
 };

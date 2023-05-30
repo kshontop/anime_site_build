@@ -16,6 +16,8 @@ export const RecentVf = () => {
   useEffect(() => {
     fetchAnimes();
   }, []);
+
+  console.log(animes);
   return (
     <div className="flex flex-col space-y-5">
       {animes.length > 0
@@ -29,7 +31,7 @@ export const RecentVf = () => {
         ))
         : new Array(6)
           .fill(undefined)
-          .map((i) => <Skeleton key={i} className="w-full h-20" />)}
+          .map((_, i) => <Skeleton key={i} className="w-full h-20" />)}
     </div>
   );
 };

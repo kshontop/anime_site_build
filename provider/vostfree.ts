@@ -26,7 +26,6 @@ class VostFree {
         let description = $(this).find(".slider-desc").text();
         let released = $(this).find(".slider-top").find("a").eq(0).text();
 
-        console.log(imageBgStyle);
         result.push({
           cover: imageBgStyle?.match(/url\((.*?)\)/)?.[1],
           poster: `${url}${poster}`,

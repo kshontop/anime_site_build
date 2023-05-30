@@ -30,7 +30,7 @@ export const PopularAnime = () => {
         ))
         : new Array(10)
           .fill(undefined)
-          .map((i) => (
+          .map((_, i) => (
             <Skeleton
               key={i}
               className="h-[250px] w-[150px] lg:h-[400px] lg:w-[200px]"
