@@ -5,12 +5,12 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <div className="flex p-5 justify-between bg-front items-center ">
-      <div className="flex space-x-3 items-center lg:ml-20">
+    <div className="flex p-5 bg-front items-center">
+      <div className="flex space-x-3 items-center lg:ml-20 flex-1">
         <p className="text-2xl">9anime</p>
       </div>
-      <div className="flex space-x-5 items-center lg:mr-20">
-        <label className="relative w-[600px] hidden lg:block">
+      <div className="flex gap-5 items-center lg:mr-20 w-1/3">
+        <label className="relative w-full hidden lg:block">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3">
             <svg
               className="h-5 w-5 fill-gray-400"
@@ -25,22 +25,22 @@ export default function Header() {
             </svg>
           </span>
           <Input
-            className="w-full bg-transparent placeholder:font-italitc rounded-lg py-2 pl-10 pr-4 focus:outline-none border-2 focus:border-gray-400 border-gray-600"
+            className="w-full placeholder:font-italitc rounded-lg py-2 pl-10 pr-4 focus:outline-none border-2 focus:border-gray-300 border-gray-400"
             placeholder="Search Anime"
             type="text"
           />
         </label>
-        <div className="flex space-x-3">
+        <div className="flex gap-5">
           <Link
             href={"/"}
-            className="flex text-center space-x-3 hover:text-primary cursor-pointer"
+            className="flex text-center gap-5 hover:text-primary cursor-pointer"
           >
             <HomeIcon />
             <p className="text-lg font-bold">Home</p>
           </Link>
           <Link
             href={"/"}
-            className="flex text-center hover:text-primary space-x-3 cursor-pointer "
+            className="flex text-center hover:text-primary gap-5 cursor-pointer "
           >
             <Tv />
             <p className="hover:text-primary text-lg font-bold">Anime</p>

@@ -1,11 +1,15 @@
 import {
+  IAnimeInfo,
   ICarousel,
+  IEpisode,
   IEpisodeRecent,
   IPopularAnime,
   ITopVfAnime,
   ITopVostfrAnime,
 } from "@/@types/anime";
+import { restoreId, getPureID } from "@/lib/extractor";
 import * as cheerio from "cheerio";
+import { Page } from "puppeteer";
 
 class VostFree {
   private readonly baseUrl: string = "https://vostfree.in";
@@ -205,6 +209,83 @@ class VostFree {
     } catch (error) {
       return [];
     }
+  }
+
+  async getEpisodesEmbeds(page: Page) {
+    const episodeNode = await page.evaluate(() => {
+      let select: HTMLSelectElement | null = document.querySelector(
+        ".new_player_selector"
+      );
+      let eps: { title: string; btn: string }[] = [];
+      for (let i = 0; i < select!.length; i++) {
+        eps.push({
+          title: select!.options[i].innerHTML,
+          btn: select!.options[i].value,
+        });
+      }
+      return eps;
+    });
+
+    let episodes: IEpisode[] = [];
+
+    for (let ep of episodeNode) {
+      await page.select(".new_player_selector", ep.btn);
+      let iframeSrc = await page.evaluate(() => {
+        return document.querySelector("iframe")?.getAttribute("src");
+      });
+      episodes.push({
+        title: ep.title,
+        src: iframeSrc || undefined,
+      });
+    }
+
+    return episodes;
+  }
+
+  async getInfo(id: string, page: Page) {
+    let uri = restoreId(id);
+    if (typeof uri === "undefined") return;
+    await page.goto(uri);
+    let details = await page.evaluate(() => {
+      let cover = document
+        .querySelector(".image-bg")
+        ?.getAttribute("style")
+        ?.match(/url\((.*?)\)/)?.[1];
+      let title = document.querySelector(".image-bg-content h1")?.innerHTML;
+      let poster = document
+        .querySelector(".image-bg-content")
+        ?.querySelector("img")
+        ?.getAttribute("src");
+
+      let description = document.querySelector(
+        ".image-bg-content .slide-desc"
+      )?.innerHTML;
+
+      let genreNodes = Array.from(
+        document
+          .querySelectorAll(".image-bg-content .slide-top")[1]
+          .querySelectorAll("a")
+      );
+      let genre = genreNodes.map((el) => el.innerText);
+
+      let rating = document.querySelector(".ratingtypeplusminus")?.innerHTML;
+
+      return {
+        title,
+        cover,
+        poster: "https://vostfree.in" + poster,
+        description,
+        genre,
+        rating,
+      };
+    });
+    let animeInfo: IAnimeInfo = {
+      id: getPureID(id),
+      animeId: id,
+      ...details,
+      episodes: await this.getEpisodesEmbeds(page),
+    };
+    return animeInfo;
   }
 }
 

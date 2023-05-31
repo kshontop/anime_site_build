@@ -2,20 +2,20 @@ import React from "react";
 import { PlayCircle } from "lucide-react";
 
 type EpisodeButtonProps = {
-  number: number;
+  title: string | undefined;
   isCurrent: boolean;
-  cb: (ep: number) => void;
+  cb: () => void;
 };
 
-function EpisodeButton({ number, isCurrent, cb }: EpisodeButtonProps) {
+function EpisodeButton({ title, isCurrent, cb }: EpisodeButtonProps) {
   return (
     <div
       className={`w-full bg-${isCurrent ? "primary" : "front"
         } p-2 rounded-lg flex justify-between pl-5 pr-5 cursor-pointer ${isCurrent ? "opacity-100" : "opacity-70"
         } hover:opacity-100`}
-      onClick={() => cb(number)}
+      onClick={() => cb()}
     >
-      <p>Episode {number}</p>
+      <p>{title}</p>
       <PlayCircle />
     </div>
   );

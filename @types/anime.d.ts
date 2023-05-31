@@ -39,3 +39,20 @@ export interface IPopularAnime {
   description: string;
   type?: String;
 }
+
+export interface IAnimeInfo {
+  id?: string;
+  animeId?: string;
+  title?: string;
+  description?: string;
+  cover?: string;
+  poster?: string;
+  rating?: string;
+  genre?: string[];
+  episodes: IEpisode[];
+}
+
+export interface IEpisode {
+  title?: string;
+  src?: string;
+}
