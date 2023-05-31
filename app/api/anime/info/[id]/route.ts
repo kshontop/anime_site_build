@@ -8,7 +8,10 @@ export async function GET(
 ) {
   const vostfree = new VostFree();
 
-  const browser: Browser = await puppeteer.launch({ headless: "new" });
+  const browser: Browser = await puppeteer.launch({
+    headless: "new",
+    args: ["--no-sandbox"],
+  });
   const page: Page = await browser.newPage();
   let details = await vostfree.getInfo(params.id, page);
   await browser.close();
